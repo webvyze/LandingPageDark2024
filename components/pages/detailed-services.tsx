@@ -1,44 +1,47 @@
-import { useEffect, useState } from "react";
 import Image from "next/image";
-
-interface Service {
-  image: string;
-  title: string;
-  description: string;
-  howWeWork: string;
-  benefits: string[];
-  video?: string;
-}
+import type { StaticImageData } from "next/image";
+import { useEffect, useState } from "react";
 
 interface DetailedServiceModalProps {
-  service: Service;
+  service: {
+    title: string;
+    image: StaticImageData;
+    description: string;
+    howWeWork: string;
+    benefits: string[];
+    video: string;
+  };
   onClose: () => void;
+  transitionDuration?: number;
 }
 
-export default function DetailedServiceModal({ service, onClose }: DetailedServiceModalProps) {
-    const [isVisible, setIsVisible] = useState(false);
-  
-    useEffect(() => {
-      // Prevent scroll while modal is open
-      document.body.style.overflow = "hidden";
-      // Trigger animation
-    setTimeout(() => setIsVisible(true), 50); // slight delay to start the transition
-    return () => {
-      document.body.style.overflow = "auto";
-      setIsVisible(false);
-    };
+export default function DetailedServices({
+  service,
+  onClose,
+  transitionDuration = 300,
+}: DetailedServiceModalProps) {
+  const [isVisible, setIsVisible] = useState(false);
+
+  useEffect(() => {
+    setIsVisible(true);
   }, []);
+
+  const handleClose = () => {
+    setIsVisible(false);
+    setTimeout(onClose, transitionDuration);
+  };
 
   return (
     <div
-      className={`fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50 transition-opacity duration-500 ease-out ${
+      className={`fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50 transition-opacity duration-${transitionDuration} ease-out ${
         isVisible ? "opacity-100" : "opacity-0"
       }`}
     >
       <div
-        className={`relative w-full max-w-3xl p-6 bg-gray-900 rounded-lg shadow-lg transform transition-all duration-500 ease-out ${
+        className={`relative w-full max-w-3xl p-6 bg-gray-900 rounded-lg shadow-lg transform transition-transform duration-${transitionDuration} ease-out ${
           isVisible ? "scale-100 opacity-100" : "scale-90 opacity-0"
         }`}
+        style={{ maxHeight: "80vh", overflowY: "auto" }}
       >
         <div className="flex items-center gap-4 mb-4">
           <Image
@@ -76,7 +79,6 @@ export default function DetailedServiceModal({ service, onClose }: DetailedServi
               className="w-full mt-2 rounded-lg"
               controls
               src={service.video}
-              
             />
           </div>
         )}
@@ -84,7 +86,7 @@ export default function DetailedServiceModal({ service, onClose }: DetailedServi
         {/* Close Button at the Bottom */}
         <button
           className="mt-6 w-full py-2 bg-indigo-600 text-white font-semibold rounded-lg hover:bg-indigo-500 transition duration-200"
-          onClick={onClose}
+          onClick={handleClose}
         >
           Close
         </button>
@@ -92,4 +94,3 @@ export default function DetailedServiceModal({ service, onClose }: DetailedServi
     </div>
   );
 }
-
