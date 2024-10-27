@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import { useState, MouseEvent } from "react";
 import Image from "next/image";
 import VideoEditingImg from "@/public/images/video-editing.png";
@@ -9,7 +9,6 @@ import VoiceOverImg from "@/public/images/voice-over.png";
 import PodcastEditingImg from "@/public/images/podcast-editing.png";
 import CopywritingImg from "@/public/images/copywriting.png";
 import DetailedServices from "@/components/pages/detailed-services";
-
 
 // Define the type for a service
 interface Service {
@@ -70,9 +69,8 @@ const serviceData: Service[] = [
     benefits: ["Increased SEO performance", "Engaging, brand-focused copy", "Clear and persuasive messaging"],
     video: "/videos/copywriting.mp4",
   },
-  ];
-  // Additional services...
-
+  // Add additional services as needed
+];
 
 export default function Services() {
   const [selectedService, setSelectedService] = useState<Service | null>(null);
@@ -97,22 +95,20 @@ export default function Services() {
     <section id="services">
       <div className="mx-auto max-w-6xl px-4 sm:px-6">
         <div className="pb-12 md:pb-20">
-          {/* Section header */}
           <div className="mx-auto max-w-3xl pb-12 text-center md:pb-20">
-            <div className="inline-flex items-center gap-3 pb-3 before:h-px before:w-8 before:bg-gradient-to-r before:from-transparent before:to-indigo-200/50 after:h-px after:w-8 after:bg-gradient-to-l after:from-transparent after:to-indigo-200/50">
-              <span className="inline-flex bg-gradient-to-r from-indigo-500 to-indigo-200 bg-clip-text text-transparent">
+            <div className="inline-flex items-center gap-3 pb-3">
+              <span className="bg-gradient-to-r from-indigo-500 to-indigo-200 bg-clip-text text-transparent">
                 Our Services
               </span>
             </div>
-            <h2 className="animate-[gradient_6s_linear_infinite] bg-[linear-gradient(to_right,theme(colors.gray.200),theme(colors.indigo.200),theme(colors.gray.50),theme(colors.indigo.300),theme(colors.gray.200))] bg-[length:200%_auto] bg-clip-text pb-4 font-nacelle text-3xl font-semibold text-transparent md:text-4xl">
+            <h2 className="bg-gradient-to-r from-gray-200 via-indigo-200 to-gray-50 bg-clip-text text-3xl font-semibold text-transparent md:text-4xl">
               Explore Our Full Range of Services
             </h2>
             <p className="text-lg text-indigo-200/65">
-              We provide a variety of services to help you scale your content and business. From video editing to voiceovers, we've got you covered.
+              We provide a variety of services to help you scale your content and business.
             </p>
           </div>
 
-          {/* Spotlight items */}
           <div className="group mx-auto grid max-w-sm items-start gap-6 lg:max-w-none lg:grid-cols-3">
             {serviceData.map((service, index) => (
               <div
@@ -124,25 +120,18 @@ export default function Services() {
                 className="relative h-full overflow-hidden rounded-2xl bg-gray-800 p-px cursor-pointer transition-transform duration-300 hover:scale-105"
               >
                 <div
-                  className={`relative z-20 h-full overflow-hidden rounded-[inherit] bg-gray-950 transition-opacity ${
+                  className={`relative z-20 h-full overflow-hidden rounded-[inherit] bg-gray-950 transition-opacity duration-300 ${
                     hoveringCardIndex === index ? "opacity-100" : "opacity-90"
                   }`}
-                  style={{
-                    "--mouse-x": `${mousePosition.x}px`,
-                    "--mouse-y": `${mousePosition.y}px`,
-                  }}
                 >
-                  {/* Spotlight effect for each card */}
                   {hoveringCardIndex === index && (
                     <div
-                      className="absolute inset-0 rounded-[inherit] transition duration-300 ease-out pointer-events-none"
+                      className="absolute inset-0 rounded-[inherit] pointer-events-none"
                       style={{
                         background: `radial-gradient(circle at ${mousePosition.x}px ${mousePosition.y}px, rgba(79, 70, 229, 0.3), transparent 70%)`,
                       }}
                     ></div>
                   )}
-
-                  {/* Image */}
                   <Image
                     className="inline-flex"
                     src={service.image}
@@ -150,7 +139,6 @@ export default function Services() {
                     height={288}
                     alt={service.title}
                   />
-                  {/* Content */}
                   <div className="p-6">
                     <div className="mb-3">
                       <span className="btn-sm relative rounded-full bg-gray-800/40 px-2.5 py-0.5 text-xs font-normal">
@@ -168,17 +156,17 @@ export default function Services() {
         </div>
       </div>
 
-      {/* DetailedServices Modal with smooth open/close animation */}
       {selectedService && (
         <DetailedServices
           service={selectedService}
           onClose={() => setSelectedService(null)}
-          transitionDuration={300} // Example duration for transition animation
+          transitionDuration={300}
         />
       )}
     </section>
   );
 }
+
 
 
 
