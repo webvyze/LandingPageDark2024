@@ -1,6 +1,10 @@
 import { useState, useEffect } from "react";
 
-export default function FAQ({ onClose }) {
+interface FAQProps {
+  onClose: () => void;
+}
+
+export default function FAQ({ onClose }: FAQProps) {
   const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
@@ -37,33 +41,41 @@ export default function FAQ({ onClose }) {
 
   return (
     <div
-      className={`fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50 transition-opacity duration-300 ${
+      className={`fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50 transition-opacity duration-300 ease-in-out ${
         isVisible ? "opacity-100" : "opacity-0"
       }`}
+      onClick={() => setIsVisible(false)}
     >
       <div
-        className={`bg-gray-900 text-gray-200 p-8 rounded-lg max-w-2xl mx-auto transition-transform transform duration-500 ${
+        className={`bg-gray-900 text-gray-200 p-8 rounded-lg max-w-2xl mx-auto transition-transform duration-500 ease-in-out transform ${
           isVisible ? "scale-100" : "scale-90"
         }`}
+        onClick={(e) => e.stopPropagation()}
       >
-        <h3 className="text-2xl font-semibold mb-6">Frequently Asked Questions</h3>
-        <div className="space-y-6">
+        <h3 className="text-2xl font-semibold mb-6 text-center text-indigo-400">
+          Frequently Asked Questions
+        </h3>
+        <div
+          className="space-y-6 max-h-[60vh] overflow-y-auto scrollbar-thin scrollbar-thumb-gray-700 scrollbar-track-gray-800 pr-2"
+        >
           {faqData.map((faq, index) => (
             <div
               key={index}
-              className="border-b border-gray-700 pb-4 transition-opacity duration-500 opacity-100"
+              className="border-b border-gray-700 pb-4 transition-opacity duration-300"
             >
-              <h4 className="text-xl font-bold text-indigo-400 mb-2">{faq.question}</h4>
-              <p className="text-gray-300">{faq.answer}</p>
+              <h4 className="text-lg font-semibold text-indigo-500 mb-2">
+                {faq.question}
+              </h4>
+              <p className="text-gray-300 leading-relaxed">{faq.answer}</p>
             </div>
           ))}
         </div>
         <button
           onClick={() => {
             setIsVisible(false);
-            setTimeout(onClose, 300);
+            setTimeout(onClose, 300); // Delay onClose to allow animation
           }}
-          className="mt-8 px-6 py-3 bg-indigo-500 hover:bg-indigo-600 rounded-md text-white"
+          className="mt-6 px-6 py-3 bg-indigo-500 hover:bg-indigo-600 rounded-md text-white w-full transition-colors duration-200 ease-in-out"
         >
           Close
         </button>
