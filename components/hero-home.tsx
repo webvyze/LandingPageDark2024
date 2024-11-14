@@ -32,8 +32,23 @@ export default function HeroHome() {
                   data-aos="fade-up"
                   data-aos-delay={200}
                 >
-                  We connect creators, influencers, and businesses with top-tier freelance talent. From YouTube videos to social media management, let us handle the tasks while you focus on your passion.
+                  At Webvyze, we take the hassle out of finding the right talent for your projects. Whether you're a creator, influencer, or business, we connect you with top freelancers and handle the process from start to polished finish—so you can focus on what you love, while we make your vision a reality.
                 </p>
+
+                {/* Motto/Quote */}
+                <blockquote
+                  className="text-xl font-semibold text-green-400 italic mb-8"
+                  data-aos="fade-up"
+                  data-aos-delay={300}
+                >
+                  <p className="text-gray-300">"From dreams to screens, from ideas to scenes</p>
+                  <p className="text-gray-300">we bring your vision to life, no in-betweens."</p>
+                  <p className="text-sm text-gray-400 italic" data-aos="fade-up" data-aos-delay={400}>
+                  - WebVyze
+                </p>
+                </blockquote>
+
+               
                 <div className="mx-auto max-w-xs sm:flex sm:max-w-none sm:justify-center">
                   <div data-aos="fade-up" data-aos-delay={400}>
                     <button
@@ -70,7 +85,7 @@ export default function HeroHome() {
       <section ref={servicesRef} id="services">
         {/* Your "Our Services" content goes here */}
         <div className="mx-auto max-w-6xl px-4 sm:px-6">
-          <h2 className="text-center text-3xl font-semibold text-gray-200"></h2>
+          <h2 className="text-center text-3xl font-semibold text-gray-200">Our Services</h2>
           {/* Add service content here */}
         </div>
       </section>
